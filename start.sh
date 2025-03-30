@@ -16,6 +16,8 @@ lineup=USA-MI21464-X
 lineup=USA-YOUTUBE-X
 EOF
 
+rm -f /var/www/html/tv_grab_zz_sdjson.cache || echo "No cache file to clean"
+
 # Initial run of the grab command
 tv_grab_zz_sdjson --config-file /var/www/html/tv_grab_zz_sdjson.conf --output /var/www/html/tvxml.xml --days 2
 
