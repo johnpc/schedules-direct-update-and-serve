@@ -47,14 +47,21 @@ Set the environment variables for your setup as described below.
 
 ## Configuration
 
-The service is pre-configured with several lineups:
+The service can be configured with custom lineups using the `SD_LINEUPS` environment variable. By default, it includes:
 
 - USA-0000001-CUSTOM
 - USA-DITV505-X
 - USA-MI21464-X
 - USA-YOUTUBE-X
 
-You can modify these lineups by editing the `start.sh` script and rebuilding the container.
+You can modify these lineups by setting the `SD_LINEUPS` environment variable in your docker-compose.yaml file:
+
+```yaml
+environment:
+  - SD_LINEUPS=USA-0000001-CUSTOM,USA-DITV505-X,USA-MI21464-X,USA-YOUTUBE-X
+```
+
+Multiple lineups should be separated by commas.
 
 ## Usage
 
@@ -79,6 +86,7 @@ You can use this URL in your media center software (such as Threadfin, Plex, Emb
 |----------|-------------|
 | SCHEDULES_DIRECT_USERNAME | Your Schedules Direct username |
 | SCHEDULES_DIRECT_PASSWORD | Your Schedules Direct password |
+| SD_LINEUPS | Comma-separated list of lineups to fetch (default: USA-0000001-CUSTOM,USA-DITV505-X,USA-MI21464-X,USA-YOUTUBE-X) |
 | TZ | Timezone (default: UTC. Since it runs every day at midnight, choose a TZ where that is the time you want it to run.) |
 
 ## Volumes

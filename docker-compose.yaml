@@ -6,6 +6,7 @@ services:
     environment:
       - SD_USERNAME=${SCHEDULES_DIRECT_USERNAME}
       - SD_PASSWORD=${SCHEDULES_DIRECT_PASSWORD}
+      - SD_LINEUPS=USA-0000001-CUSTOM,USA-DITV505-X,USA-MI21464-X,USA-YOUTUBE-X
       - TZ=America/New_York
     container_name: xmltv
     ports:

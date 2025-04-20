@@ -1,3 +1,9 @@
 #!/bin/bash
-# tv_grab_zz_sdjson --configure
-/usr/bin/tv_grab_zz_sdjson --output /home/umbrel/xmltv/tvxml.xml
+# Scheduled update of Schedules Direct data
+
+echo "$(date '+%Y-%m-%d %H:%M:%S') - [SCHEDULED SYNC] Starting Schedules Direct data fetch..."
+
+# Run the tv_grab_zz_sdjson command with the config file
+/usr/bin/tv_grab_zz_sdjson --config-file /var/www/html/tv_grab_zz_sdjson.conf --output /var/www/html/tvxml.xml --days 2
+
+echo "$(date '+%Y-%m-%d %H:%M:%S') - [SCHEDULED SYNC] Completed Schedules Direct data fetch"
