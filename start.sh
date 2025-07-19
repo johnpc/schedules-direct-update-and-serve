@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Store environment variables for cron runs
+printenv > /etc/environment
+crontab /etc/cron.d/tvgrab-cron
+
 # Start cron
 service cron start
 
@@ -22,6 +26,9 @@ if [ -z "${SD_LINEUPS}" ]; then
   SD_LINEUPS="${DEFAULT_LINEUPS}"
 fi
 
+# Add number of days to fetch guide data for
+fetch_days=${SD_FETCH_DAYS}
+
 # Process comma-separated lineup list
 IFS=',' read -ra LINEUP_ARRAY <<< "${SD_LINEUPS}"
 for lineup in "${LINEUP_ARRAY[@]}"; do
@@ -37,7 +44,7 @@ rm -f /var/www/html/tv_grab_zz_sdjson.cache || echo "No cache file to clean"
 
 # Initial run of the grab command
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [INITIAL SYNC] Starting Schedules Direct data fetch..."
-tv_grab_zz_sdjson --config-file /var/www/html/tv_grab_zz_sdjson.conf --output /var/www/html/tvxml.xml --days 2
+tv_grab_zz_sdjson --config-file /var/www/html/tv_grab_zz_sdjson.conf --output /var/www/html/tvxml.xml --days $fetch_days
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [INITIAL SYNC] Completed Schedules Direct data fetch"
 
 # Set up log rotation for cron.log

@@ -87,6 +87,7 @@ You can use this URL in your media center software (such as Threadfin, Plex, Emb
 | SCHEDULES_DIRECT_USERNAME | Your Schedules Direct username |
 | SCHEDULES_DIRECT_PASSWORD | Your Schedules Direct password |
 | SD_LINEUPS | Comma-separated list of lineups to fetch (default: USA-0000001-CUSTOM,USA-DITV505-X,USA-MI21464-X,USA-YOUTUBE-X) |
+| SD_FETCH_DAYS | The number of days to fetch guide data for (default: 2) |
 | TZ | Timezone (default: UTC. Since it runs every day at midnight, choose a TZ where that is the time you want it to run.) |
 
 ## Volumes
