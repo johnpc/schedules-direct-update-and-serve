@@ -44,7 +44,7 @@ rm -f /var/www/html/tv_grab_zz_sdjson.cache || echo "No cache file to clean"
 
 # Initial run of the grab command
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [INITIAL SYNC] Starting Schedules Direct data fetch..."
-tv_grab_zz_sdjson --config-file /var/www/html/tv_grab_zz_sdjson.conf --output /var/www/html/tvxml.xml --days $fetch_days
+/fetch_json.sh
 echo "$(date '+%Y-%m-%d %H:%M:%S') - [INITIAL SYNC] Completed Schedules Direct data fetch"
 
 # Set up log rotation for cron.log
