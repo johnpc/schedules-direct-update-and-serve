@@ -3,7 +3,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y bash
 RUN apt-get install -y xmltv-util
-RUN apt-get install -y nginx
+RUN apt-get install -y nginx python3
 # Install cron in addition to your other packages
 RUN apt-get update && apt-get install -y cron
 
@@ -18,6 +18,7 @@ COPY tvgrab-cron /etc/cron.d/tvgrab-cron
 RUN chmod 0644 /etc/cron.d/tvgrab-cron
 
 # Create an entrypoint script to generate the config with the password
+COPY index.nginx-debian.html /var/www/html/index.html
 COPY start.sh /start.sh
 COPY fetch_json.sh /fetch_json.sh
 RUN chmod +x /start.sh /fetch_json.sh
