@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Welcome to nginx!</title>
+<title>Schedules Direct XMLTV Service</title>
+<meta http-equiv="refresh" content="60">
 <style>
 html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
+body { max-width: 40em; margin: 2em auto; font-family: system-ui, sans-serif; padding: 0 1em; }
+.ok { color: #2d7; }
+.error { color: #e44; }
+pre { background: #1a1a1a; color: #eee; padding: 1em; overflow-x: auto; border-radius: 4px; }
 </style>
 </head>
 <body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
+<h1>Schedules Direct XMLTV Service</h1>
+<div id="status">Loading...</div>
+<h2>Endpoints</h2>
+<ul>
+<li><a href="/tvxml.xml">/tvxml.xml</a> — XMLTV guide data</li>
+<li><a href="/status.json">/status.json</a> — machine-readable status</li>
+<li><a href="/last_error.log">/last_error.log</a> — last error output (if any)</li>
+</ul>
+<script>
+fetch('/status.json').then(r=>r.json()).then(s=>{
+  const d=document.getElementById('status');
+  if(s.status==='ok'){
+    d.innerHTML=`<p class="ok"><strong>✓ Healthy</strong></p>
+      <p>Last success: ${s.last_success}<br>File size: ${(s.file_size/1024).toFixed(0)} KB</p>`;
+  } else {
+    d.innerHTML=`<p class="error"><strong>✗ Error (exit code ${s.exit_code})</strong></p>
+      <p>Last failure: ${s.last_failure}</p><pre>${s.error||'Unknown error'}</pre>`;
+  }
+}).catch(()=>{
+  document.getElementById('status').innerHTML='<p>No status yet — waiting for first fetch to complete.</p>';
+});
+</script>
 </body>
 </html>
